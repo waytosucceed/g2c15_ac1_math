@@ -1,0 +1,52 @@
+[
+    {
+        "questionNo": "Q1",
+        "question": "Subtract and choose the correct answer. <br>9 - 4 = ?",
+        "options": [
+            "4",
+            "5",
+            "6"
+        ],
+        "correct": 1
+    },
+    {
+        "questionNo": "Q2",
+        "question": "Subtract and choose the correct answer. <br>6 - 2 = ?",
+        "options": [
+            "5",
+            "4",
+            "6"
+        ],
+        "correct": 1
+    },
+    {
+        "questionNo": "Q3",
+        "question": "Subtract and choose the correct answer. <br>8 - 5 = ?",
+        "options": [
+            "5",
+            "3",
+            "4"
+        ],
+        "correct": 1
+    },
+    {
+        "questionNo": "Q4",
+        "question": "Subtract and choose the correct answer. <br>9 - 6 = ?",
+        "options": [
+            "5",
+            "3",
+            "4"
+        ],
+        "correct": 1
+    },
+    {
+        "questionNo": "Q5",
+        "question": "Subtract and choose the correct answer. <br>13 - 10 = ?",
+        "options": [
+            "4",
+            "5",
+            "3"
+        ],
+        "correct": 2
+    }
+]

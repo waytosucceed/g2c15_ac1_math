@@ -1,0 +1,106 @@
+
+
+#questiondiv{
+
+    padding-top:8px;
+    padding-bottom:8px;
+    font-size:25px;
+    height:100%;
+  }
+
+  #numdiv{
+    font-size:30px;
+    color:black;
+    margin:10%
+  }
+
+  #question{
+    font-family:'Tahoma';
+    /* margin-bottom:1%;; */
+    display: inline;
+    font-size: 1.6vw;
+    margin-top: 1%;     
+    color: black;
+  }
+  
+
+
+  li{
+    list-style-type:none;
+    margin:10px;
+    /* padding: 10px; */
+    font-size: 1.9vw;
+    font-weight: 500;
+    align-items: center;
+    /* background-color: #f56c6c; */
+    justify-items: center;
+    
+  }
+  
+  
+ 
+  .menu{
+    text-align:initial;
+    background-color: white;
+    padding-bottom: 20px;
+  
+  
+  }
+  .maindiv{
+      /* background-color: rgb(36, 124, 247); */
+      height: 24em;;
+      margin-top: 1%;
+ 
+  }
+  #heading{
+      font-family:Impact;
+      font-size:40px;
+     
+     
+  }
+
+  footer{
+    bottom:0;
+    position: fixed;
+    width: 100%
+  }
+
+  div.scroll{
+    overflow-y: auto;
+    margin-bottom:30px;
+  }
+  
+  hr{
+    height:2px;
+    background-color: black;
+  }
+span{
+  font-size: 25px;
+}
+#nextbtn{
+   width: 50%;
+
+}
+input[type=radio] {
+  
+  width: 5%;
+  height: 1em;
+}
+
+#subbtn{
+margin-top:18px;
+width: 2em;
+height: 3em;
+
+}
+.smallbtn{
+  width: 4em;
+  height: 2em;
+  margin: 3px;
+
+}
+#message{
+  padding-top: 1px;
+  font-size: 30px;
+  font-weight: 700;
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="wts.css" />
+  <link rel="icon" type="image/x-icon" href="Logo_last.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap"
+    rel="stylesheet"
+  />
+  <title>Activity_1</title>
+  <style>
+ 
+ .option {
+  display: block;
+  width: 100%; /* Adjust to fit the grid column */
+  margin: 10px 0; /* Add margin for spacing between buttons */
+  padding: 7px;
+  cursor: pointer;
+  background-color: #f56c6c;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 3vw;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.option:hover {
+  background-color: #0056b3;
+}
+
+    .imgdiv {
+      position: relative;
+    }
+    .question {
+     position: absolute;
+  top: 47%; /* Move to 50% from the top of imgdiv */
+  left: 50%; /* Move to 50% from the left of imgdiv */
+  transform: translate(-50%, -50%); 
+  width: 75%; /* Adjust width as needed */
+ 
+  color: black; /* Example text color */
+  font-size: 2.5rem; /* Example font size */
+  text-align: center; /* Example text alignment */
+  border-radius: 5px; /* Example border radius */
+    
+    }
+ .smallbtn.active,
+.smallbtn.default {
+  background-color: #f56c6c; /* Red color example */
+  color: #ffffff; /* White text color */
+}
+#secondImg {
+      position: absolute;
+      top: 35%;
+      left: 30%;
+    }
+    
+  </style>
+</head>
+<body>
+  <audio id="cheers">
+    <source src="cheers.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="sound" src="points.mp3"></audio>
+  <audio id="fail" src="fail.mp3"></audio>
+  <div
+    class="header"
+    style="
+      width: auto;
+      box-shadow: 5px 5px 10px rgb(0, 0, 0);
+      padding-bottom: 10px;
+    "
+  >
+    <img
+      src="Logo.png"
+      width="5%"
+      style="float: left; margin-top: 25px; text-align: left"
+      class="img-responsive"
+    />
+    <span>
+      <img
+        src="header.png"
+        width="30%"
+        height=""
+        class="img-responsive"
+        style="text-align: left"
+      />
+    </span>
+  </div>
+  <br />
+  <center>
+    <h1 id="heading">Previous Class Questions</h1>
+    <div id="questionButtons" class="container">
+      <!-- Dynamic buttons will be inserted here -->
+    </div>
+    <div class="maindiv container d-flex">
+      
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 imgdiv">
+        <div id="question" class="question"></div> 
+        <img
+          id="math_ques"
+        src="question_img.jpg"
+          width="100%"
+          height="100%"
+        />
+        <img id="secondImg" src="" alt="" width="30%" height="">
+        
+      </div>
+      
+      <div
+        id="questiondiv"
+        class="col-lg-5 col-md-5 col-sm-5 col-xs-5"
+      >
+      <div class="options container">
+        <div class="row" id="optionsRow">
+          <!-- Options will be dynamically inserted here -->
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container d-flex mt-4 mb-2">
+      <div
+        class="btnContainer col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2"
+      >
+        <button
+          id="nextbtn"
+          class="btn btn-lg btn-primary"
+          onclick="newques()"
+        >
+          Next
+        </button>
+      </div>
+      <div
+        class="messageContainer col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2"
+      >
+        <p id="message" class="message"></p>
+      </div>
+    </div>
+
+    <script>
+      let questions; // Variable to hold loaded questions data
+      let currentQuestion = 0;
+      let currentImage = 0;
+
+      // Function to fetch questions from JSON file
+      async function fetchQuestions() {
+        try {
+          const response = await fetch('questions.json'); // Fetch the JSON file
+          if (!response.ok) {
+            throw new Error('Failed to load questions');
+          }
+          questions = await response.json(); // Parse JSON response
+        } catch (error) {
+          console.error('Error loading questions:', error);
+        }
+      }
+
+      // Function to load question into UI
+// Function to load question into UI
+// Function to load question into UI
+function loadQuestion() {
+  const questionElement = document.getElementById('question');
+  const optionsRow = document.getElementById('optionsRow');
+  const messageElement = document.getElementById('message');
+  const questionImage = document.getElementById('math_ques');
+  const secondImgElement = document.getElementById('secondImg');
+  
+
+  const current = questions[currentQuestion];
+
+  questionElement.innerHTML = current.question;
+  if (current.secondImg) {
+    secondImgElement.src = current.secondImg;
+    secondImgElement.style.display = 'block';
+  } else {
+    secondImgElement.style.display = 'none';
+  }
+
+  // Clear previous options
+  optionsRow.innerHTML = '';
+
+  // Dynamically generate options
+  current.options.forEach((option, index) => {
+    const col = document.createElement('div');
+    col.classList.add('col-md-6'); // Bootstrap column class for two columns in a row
+
+    const button = document.createElement('button');
+    button.classList.add('btn', 'option');
+    button.id = 'option' + index;
+    button.innerHTML = option;
+    button.onclick = () => {// Update the input box with the selected option
+      checkAnswer(index); // Check the answer
+    };
+
+    col.appendChild(button);
+    optionsRow.appendChild(col);
+
+    // After two buttons, create a new row
+    if ((index + 1) % 2 === 0) {
+      optionsRow.appendChild(document.createElement('div')).classList.add('w-100'); // Force new row
+    }
+  });
+
+  messageElement.innerHTML = '';
+  document.getElementById('nextbtn').style.display = 'none';
+}
+
+      // Function to check selected answer
+      function checkAnswer(selected) {
+        const current = questions[currentQuestion];
+        const messageElement = document.getElementById('message');
+        if (selected === current.correct) {
+          messageElement.innerHTML = "Good Job! <div class='flip'>&#128512</div>";
+          document.getElementById('sound').play();
+          document.getElementById('nextbtn').style.display =
+            'inline-block';
+            
+        } else {
+          messageElement.innerHTML = 'Try Again! <div class="flip">😎</div>';
+          document.getElementById('fail').play();
+          document.getElementById('nextbtn').style.display = 'none';
+          
+        }
+      }
+
+      // Function to load next question
+      function newques() {
+        if (currentQuestion === questions.length - 1) {
+          document.getElementById('heading').innerHTML = '';
+          document.getElementById('math_ques').src = "last.jpg";
+          document.getElementById('question').innerHTML = '';
+          document.getElementsByClassName('options').innerHTML = "";
+          document.getElementById('cheers').play();
+          document.getElementById('message').innerHTML = '';
+          document.getElementById('nextbtn').style.display = 'none';
+          document.getElementById('questiondiv').style.display='none';
+          document.getElementById('secondImg').style.display='none';
+          document.getElementById('questionButtons').style.display='none';
+          
+        } else {
+          currentQuestion++;
+          currentImage++;
+          loadQuestion();
+          
+
+          // Update active class in question selection buttons
+    const buttons = document.querySelectorAll('.smallbtn');
+    buttons.forEach((button, index) => {
+      if (index === currentQuestion) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+        }
+      }
+
+      // Function to handle button clicks for specific question
+   // Function to handle button clicks for specific question
+function abc(x) {
+ 
+ document.getElementById('heading').innerHTML='Previous Class Questions';
+ document.getElementById('math_ques').src='question_img.jpg'
+  currentQuestion = x - 1;
+  currentImage = x - 1;
+  loadQuestion();
+
+  // Remove active class from all buttons
+  const buttons = document.querySelectorAll('.smallbtn');
+  buttons.forEach(button => button.classList.remove('active'));
+
+  // Add active class to the clicked button
+  buttons[x - 1].classList.add('active');
+}
+
+      // Initialize the quiz when window loads
+   // Initialize the quiz when window loads
+window.onload = async function () {
+  await fetchQuestions(); // Load questions from JSON
+  loadQuestion(); // Display the first question
+
+  // Generate question selection buttons dynamically
+  const questionButtonsContainer = document.getElementById('questionButtons');
+  questions.forEach((_, index) => {
+    const button = document.createElement('button');
+    button.textContent = `Q${index + 1}`;
+    button.classList.add('smallbtn');
+    button.onclick = () => abc(index + 1);
+
+    // Add 'active' class to the first button
+    if (index === 0) {
+      button.classList.add('active');
+    }
+
+    questionButtonsContainer.appendChild(button);
+  });
+};
+
+    </script>
+  </center>
+</body>
+</html>
